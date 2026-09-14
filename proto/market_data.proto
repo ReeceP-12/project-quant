@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package projectquant;
+
+// Shared schema for the market data plane (Python gateway -> C++ core,
+// fanned out over ZeroMQ PUB/SUB). Defined here as the documented source
+// of truth even though ZeroMQ carries raw bytes rather than gRPC calls —
+// see docs/decisions/0002-grpc-zeromq-ipc.md.
+
+message Tick {
+  string symbol = 1;
+  double price = 2;
+  double size = 3;
+  int64 timestamp_ns = 4;      // exchange/Alpaca timestamp, nanoseconds since epoch
+}
+
+message Quote {
+  string symbol = 1;
+  double bid_price = 2;
+  double bid_size = 3;
+  double ask_price = 4;
+  double ask_size = 5;
+  int64 timestamp_ns = 6;
+}

@@ -1,0 +1,38 @@
+# --- C++ / CMake ---
+cpp/build/
+cpp/cmake-build-*/
+*.o
+*.obj
+*.exe
+*.out
+*.dSYM/
+compile_commands.json
+
+# --- Python ---
+python/.venv/
+python/**/__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# --- Generated protobuf/gRPC stubs (regenerate from proto/, don't commit) ---
+**/*_pb2.py
+**/*_pb2_grpc.py
+**/*.pb.cc
+**/*.pb.h
+**/*.grpc.pb.cc
+**/*.grpc.pb.h
+
+# --- IDE ---
+.idea/
+.vscode/
+*.swp
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Secrets ---
+.env
+**/alpaca_keys*

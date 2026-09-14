@@ -1,0 +1,31 @@
+[project]
+name = "project-quant"
+version = "0.1.0"
+description = "Python side of Project Quant: Alpaca broker gateway + research/backtesting stack"
+requires-python = ">=3.11"
+dependencies = [
+    "alpaca-py>=0.30",
+    "pyzmq>=25",
+    "grpcio>=1.60",
+    "grpcio-tools>=1.60",
+]
+
+[project.optional-dependencies]
+research = [
+    "pandas",
+    "numpy",
+    "scikit-learn",
+]
+dev = [
+    "pytest",
+    "black",
+    "ruff",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gateway*", "research*"]
