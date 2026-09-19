@@ -6,15 +6,26 @@ package projectquant;
 // and the Python broker gateway. See docs/ARCHITECTURE.md and
 // docs/decisions/0002-grpc-zeromq-ipc.md.
 //
-// This is a starting placeholder — fields will grow as the OMS design
-// firms up. Keep this file as the single source of truth: regenerate
+// This is a starting pile as the single source of truth: regenerate
 // stubs for both languages whenever it changes, and flag schema changes
 // to the whole team.
 
 enum Side {
-  SIDE_UNSPECIFIED = 0;
+  SIDE_UNSPECIFIED = 0; //protobuf best practice, the default value if a field is never set should always specify being in an unset state to not look like real data. this is a safety measure so we dont ever buy without intent
   BUY = 1;
   SELL = 2;
+}
+enum OrderType {
+  ORDER_TYPE_UNSPECIFIED = 0;
+  MARKET = 1;
+  LIMIT = 2;
+
+}
+
+enum TimeInForce {
+  TIME_IN_FORCE_UNSPECIFIED = 0;
+  DAY = 1;
+  GTC = 2;
 }
 
 // Sent from the C++ core to the Python gateway to request an order.
@@ -23,7 +34,11 @@ message OrderIntent {
   string symbol = 2;
   Side side = 3;
   double quantity = 4;
-  // TODO: order type (market/limit/stop), time-in-force, limit price, etc.
+  double limit_price = 5;
+  OrderType order_type = 6;
+  TimeInForce time_in_force = 7;
+
+
 }
 
 // Sent from the gateway back to the core once Alpaca acknowledges,
