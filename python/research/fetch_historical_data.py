@@ -13,10 +13,13 @@ if not api_key or not secret_key:
 
 data_client = StockHistoricalDataClient(api_key, secret_key)
 
+
+##note for researchers - this is what you want to be editing
 request = StockBarsRequest(
-    symbol_or_symbols = "AAPL",
-    timeframe=TimeFrame.Day,
-    start=datetime(2024, 1, 1)
+    symbol_or_symbols = "AAPL", ##this is the ticker you need to change - look up what the ticker is for what you want to test on
+    timeframe=TimeFrame.Day, ##
+    start=datetime(2024, 1, 1), ## change the date here, - year/month/day.
+    end=datetime(2024, 6, 1) ##change the end date of the data, same format
 )
 
 response = data_client.get_stock_bars(request)
