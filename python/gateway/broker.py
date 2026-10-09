@@ -42,11 +42,18 @@ def get_order_status(order_id):
     order = trading_client.get_order_by_id(order_id)
     return order.status
 
+def cancel_order(order_id):
+    cancellation = trading_client.cancel_order_by_id(order_id)
+    return cancellation
 
 if __name__ == "__main__":
     result = submit_order("AAPL", OrderSide.BUY, 1,limit_price=150)
+
     print(result)
     print(result.id)
 
     status = get_order_status(result.id)
     print(status)
+
+    cancellation = cancel_order(result.id)
+    print(cancellation)
