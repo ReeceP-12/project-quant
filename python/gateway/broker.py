@@ -5,7 +5,8 @@ from alpaca.trading.requests import MarketOrderRequest
 from alpaca.trading.enums import OrderSide
 from alpaca.trading.enums import TimeInForce
 from alpaca.trading.requests import LimitOrderRequest
-
+from alpaca.trading.requests import GetOrdersRequest
+from alpaca.trading.enums import QueryOrderStatus
 
 
 load_dotenv()
@@ -46,6 +47,14 @@ def cancel_order(order_id):
     cancellation = trading_client.cancel_order_by_id(order_id)
     return cancellation
 
+
+#get what positions you currently have
+def get_positions():
+    return trading_client.get_all_positions()
+
+def get_open_orders(status=QueryOrderStatus.OPEN):
+    return trading_client.get_orders(filter=GetOrdersRequest(status=status))
+
 if __name__ == "__main__":
     result = submit_order("AAPL", OrderSide.BUY, 1,limit_price=150)
 
@@ -53,7 +62,16 @@ if __name__ == "__main__":
     print(result.id)
 
     status = get_order_status(result.id)
+    print(get_positions())
+    print(get_open_orders())
     print(status)
+
 
     cancellation = cancel_order(result.id)
     print(cancellation)
+
+
+
+
+
+
